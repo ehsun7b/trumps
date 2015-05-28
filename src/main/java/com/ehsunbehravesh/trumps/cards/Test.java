@@ -11,7 +11,6 @@ public class Test {
     
     public static void main(String[] args) {
         Card c = new Card(Suits.CLUB, Numbers.TWO, 2);
-        Trick trick = new Trick();
-        trick.g
+        
     }
 }

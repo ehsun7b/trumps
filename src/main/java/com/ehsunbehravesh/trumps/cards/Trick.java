@@ -34,15 +34,15 @@ public class Trick {
     /**
      * The suit which is the trump in the trick
      */
-    protected Suits trump;
+    protected final Suits trumpSuit;
 
     /**
      * Constructor which takes the trump suit
      *
-     * @param trump
+     * @param trumpSuit
      */
-    public Trick(Suits trump) {
-        this.trump = trump;
+    public Trick(Suits trumpSuit) {
+        this.trumpSuit = trumpSuit;
     }
 
     /**
@@ -55,19 +55,19 @@ public class Trick {
         boolean result = true;
 
         try {
-            if (card1.getSuit() == trump) {
+            if (card1.getSuit() == trumpSuit) {
                 result = false;
             }
 
-            if (card2.getSuit() == trump) {
+            if (card2.getSuit() == trumpSuit) {
                 result = false;
             }
 
-            if (card3.getSuit() == trump) {
+            if (card3.getSuit() == trumpSuit) {
                 result = false;
             }
 
-            if (card4.getSuit() == trump) {
+            if (card4.getSuit() == trumpSuit) {
                 result = false;
             }
         } catch (NullPointerException ex) {
@@ -90,30 +90,58 @@ public class Trick {
              * if the trick is a trump trick (all cards are trump) or none of
              * the cards are trump the winner is the higher value
              */
-            if (card1.getSuit() == trump || noneIsTrump()) {
-                if (winner.compareTo(card2) < 0) {
+            if (card1.getSuit() == trumpSuit) {
+                if (winner.compareTo(card2) < 0 && card2.getSuit() == trumpSuit) {
                     winner = card2;
                 }
 
-                if (winner.compareTo(card3) < 0) {
+                if (winner.compareTo(card3) < 0 && card3.getSuit() == trumpSuit) {
                     winner = card3;
                 }
 
-                if (winner.compareTo(card4) < 0) {
+                if (winner.compareTo(card4) < 0 && card4.getSuit() == trumpSuit) {
+                    winner = card4;
+                }
+            } else if (noneIsTrump()) {
+                if (winner.compareTo(card2) < 0 && winner.getSuit() == card2.getSuit()) {
+                    winner = card2;
+                }
+
+                if (winner.compareTo(card3) < 0 && winner.getSuit() == card3.getSuit()) {
+                    winner = card3;
+                }
+
+                if (winner.compareTo(card4) < 0 && winner.getSuit() == card4.getSuit()) {
                     winner = card4;
                 }
             } else {
                 /**
-                 * if some
+                 * if some of cards are trump but not the first card
                  */
-                if (card2.getSuit() == trump) {
-                    if (winner.getSuit() == trump) {
-                        if (winner.compareTo(card2) < 0) {
-                            winner = card2;
-                        }
-                    } else {
-                        winner = card2;
-                    }
+                if (card2.getSuit() == trumpSuit) {
+                  winner = card2;
+                } else if (winner.compareTo(card2) < 0) {
+                  winner = card2;
+                }
+                
+                if (winner.getSuit() == trumpSuit) {
+                  if (card3.getSuit() == trumpSuit && winner.compareTo(card3) < 0) {
+                    winner = card3;
+                  } 
+                } else if (card3.getSuit() == trumpSuit) {
+                  winner = card3;
+                } else if (winner.compareTo(card3) < 0) {
+                  winner = card3;
+                }
+                
+                if (winner.getSuit() == trumpSuit) {
+                  if (card4.getSuit() == trumpSuit && winner.compareTo(card4) < 0) {
+                    winner = card4;
+                  } 
+                } else if (card4.getSuit() == trumpSuit) {
+                  winner = card4;
+                } else if (winner.compareTo(card4) < 0) {
+                  winner = card4;
                 }
             }
 
@@ -210,4 +238,10 @@ public class Trick {
 
         this.card4 = card4;
     }
+
+  public Suits getTrumpSuit() {
+    return trumpSuit;
+  }
+    
+    
 }

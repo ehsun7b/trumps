@@ -41,4 +41,21 @@ public class Card {
     public Numbers getNumber() {
         return number;
     }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Card) {
+      Card c = (Card) obj;
+      return suit == c.getSuit() && number == c.getNumber();
+    }
+    
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return number.hashCode() + suit.hashCode();
+  }
+    
+    
 }

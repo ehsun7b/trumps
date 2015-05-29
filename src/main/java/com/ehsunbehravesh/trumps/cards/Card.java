@@ -59,11 +59,20 @@ public class Card extends com.ehsunbehravesh.cardgames.cards.Card implements Com
     return value.compareTo(card.value);
   }
 
+  /**
+   * Simple toString
+   * @return 
+   */
   @Override
   public String toString() {
     return "suit: ".concat(String.valueOf(suit)).concat("(" + Suits.characterOf(suit) + ")").concat(" number: ").concat(String.valueOf(number)).concat(" value: ").concat(String.valueOf(value));
   }
 
+  /**
+   * To get the value of the specified card number (in trumps game)
+   * @param number
+   * @return 
+   */
   public static int valueOf(Numbers number) {
     switch (number) {
       case TWO:

@@ -109,7 +109,13 @@ public class HandTest {
     assertTrue(hand1.getCurrentPlayer() == Players.NORTH);
     System.out.println("");
     printCards(deal);
+    
+    List<Card> northHand = hand1.getPlayerHand(Players.NORTH);
+    List<Card> southHand = hand1.getPlayerHand(Players.SOUTH);
+    List<Card> eastHand = hand1.getPlayerHand(Players.EAST);
+    List<Card> westHand = hand1.getPlayerHand(Players.WEST);
   }
+
   
   private static void printCards(List<Card> cards) {
     Iterator<Card> iterator = cards.iterator();
